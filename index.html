@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link href='styles.css' rel='stylesheet' type='text/css'>
+    <script src="script.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<div class="calculator">
+    <div>
+        <form name="form">
+            <input name="field" class="input-field" value="0">
+        </form>
+    </div>
+    <div class="container">
+        <div class="buttons">
+            <a href="#" onclick="addSymbol('(')" class="button">(</a>
+            <a href="#" onclick="addSymbol(')')" class="button">)</a>
+            <a href="#" onclick="deleteSymbol()" class="button">DEL</a>
+            <a href="#" onclick="deleteAllSymbols()" class="button">AC</a>
+        </div>
+        <div class="buttons">
+            <a href="#" onclick="addSymbol('1')" class="button">1</a>
+            <a href="#" onclick="addSymbol('2')" class="button">2</a>
+            <a href="#" onclick="addSymbol('3')" class="button">3</a>
+            <a href="#" onclick="addSymbol('+')" class="button">+</a>
+        </div>
+        <div class="buttons">
+            <a href="#" onclick="addSymbol('4')" class="button">4</a>
+            <a href="#" onclick="addSymbol('5')" class="button">5</a>
+            <a href="#" onclick="addSymbol('6')" class="button">6</a>
+            <a href="#" onclick="addSymbol('-')" class="button">-</a>
+        </div>
+        <div class="buttons">
+            <a href="#" onclick="addSymbol('7')" class="button">7</a>
+            <a href="#" onclick="addSymbol('8')" class="button">8</a>
+            <a href="#" onclick="addSymbol('9')" class="button">9</a>
+            <a href="#" onclick="addSymbol('*')" class="button">*</a>
+        </div>
+        <div class="buttons">
+            <a href="#" onclick="addSymbol('0')" class="button">0</a>
+            <a href="#" onclick="addSymbol('.')" class="button">.</a>
+            <a href="#" onclick="addSymbol('/')" class="button">/</a>
+            <a href="#" onclick="addSymbol('')" class="button">=</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
