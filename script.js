@@ -28,8 +28,7 @@ let deleteSymbol = () => {
     expression = expression.substr(0, expression.length - 1);
     if (!expression.length) {
         addSymbol('0');
-    }
-    else {
+    } else {
         writeToInput();
     }
 }
@@ -44,25 +43,24 @@ let checkExpression = () => {
     for (let i = 0; i < expression.length; i++) {
         if (expression[i] !== '(' && expression[i] !== ')')
             continue;
-        kolBraces+= (expression[i] === '(') ? 1 : -1;
+        kolBraces += (expression[i] === '(') ? 1 : -1;
         if (i > 0) {
             if (expression[i] === expression[i - 1])
                 continue;
-            if (expression[i] === '('&& !(expression[i - 1] in signs)) {
+            if (expression[i] === '(' && !(expression[i - 1] in signs)) {
                 console.log(expression[i - 1]);
                 return false;
             }
-            if (expression[i] === ')'&& expression[i - 1] !== '.' && isNaN(expression[i - 1])) {
+            if (expression[i] === ')' && expression[i - 1] !== '.' && isNaN(expression[i - 1])) {
                 return false;
             }
-        }
-        else if (i < expression.length - 1){
+        } else if (i < expression.length - 1) {
             if (expression[i] === expression[i + 1])
                 continue;
-            if (expression[i] === '(' && isNaN(expression[i + 1])){
+            if (expression[i] === '(' && isNaN(expression[i + 1])) {
                 return false;
             }
-            if (expression[i] === ')' && !(expression[i + 1] in signs)){
+            if (expression[i] === ')' && !(expression[i + 1] in signs)) {
                 return false;
             }
         }
@@ -70,13 +68,8 @@ let checkExpression = () => {
     return !kolBraces;
 }
 
-/*
-( * + - / '(' ( 0 1 2 3 4 5 6 7 8 9
-) 0 1 2 3 4 5 6 7 8 9 .  ')' ) * + - /
- */
-
 let calculate = () => {
-    if (!checkExpression()){
+    if (!checkExpression()) {
         expression = 'error';
         writeToInput();
         return;
