@@ -48,7 +48,6 @@ let checkExpression = () => {
             if (expression[i] === expression[i - 1])
                 continue;
             if (expression[i] === '(' && !(expression[i - 1] in signs)) {
-                console.log(expression[i - 1]);
                 return false;
             }
             if (expression[i] === ')' && expression[i - 1] !== '.' && isNaN(expression[i - 1])) {
