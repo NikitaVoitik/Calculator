@@ -19,7 +19,7 @@ body{
     font-size: 50px;
     border: 4px solid black;
     display: flex;
-    text-align: end;
+    text-align: right;
     padding: 0 10px 0 10px;
 }
 
