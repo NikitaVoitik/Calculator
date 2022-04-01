@@ -1,4 +1,4 @@
-let signs = {
+const signs = {
     '+': '+',
     '-': '-',
     '*': '*',
@@ -7,14 +7,14 @@ let signs = {
 
 let expression = '0';
 
-let writeToInput = () => {
-    let input = document.forms.form.field;
+const writeToInput = () => {
+    const input = document.forms.form.field;
     expression = String(expression);
-    let length = expression.length;
+    const length = expression.length;
     input.value = expression.substr(Math.max(0, length - 15), Math.min(length, 15));
 }
 
-let addSymbol = (number) => {
+const addSymbol = (number) => {
     if (expression === '0')
         expression = '';
     if (number === '.' && isNaN(expression[expression.length - 1])) {
@@ -24,7 +24,7 @@ let addSymbol = (number) => {
     writeToInput();
 }
 
-let deleteSymbol = () => {
+const deleteSymbol = () => {
     expression = expression.substr(0, expression.length - 1);
     if (!expression.length) {
         addSymbol('0');
@@ -33,12 +33,12 @@ let deleteSymbol = () => {
     }
 }
 
-let deleteAllSymbols = () => {
+const deleteAllSymbols = () => {
     expression = '0';
     writeToInput();
 }
 
-let checkExpression = () => {
+const checkExpression = () => {
     let kolBraces = 0;
     for (let i = 0; i < expression.length; i++) {
         if (expression[i] !== '(' && expression[i] !== ')')
@@ -67,7 +67,7 @@ let checkExpression = () => {
     return !kolBraces;
 }
 
-let calculate = () => {
+const calculate = () => {
     if (!checkExpression()) {
         expression = 'error';
         writeToInput();
