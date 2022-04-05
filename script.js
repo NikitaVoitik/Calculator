@@ -1,11 +1,5 @@
-//const signs = ['+', '-', '*', '/'];
-const signs = {
-    '+' : '+',
-    '-' : 1,
-    '/' : 2,
-    '*' : 3,
-}
-const verdicts = ['error', Infinity, NaN];
+const signs = ['+', '-', '*', '/'];
+const verdicts = ['error', 'Infinity', 'NaN', 'ты чмо'];
 
 let expression = '0';
 
@@ -16,15 +10,26 @@ const writeToInput = () => {
     input.value = expression.substr(Math.max(0, length - 15), Math.min(length, 15));
 }
 
+const inArray = (elem, array) => {
+    console.log(elem, array);
+    for(let prop in array){
+        if (elem === array[prop]){
+            console.log(true);
+            return true;
+        }
+    }
+    return false;
+}
+
 const addSymbol = (symbol) => {
     const length = expression.length;
-    console.log(symbol, symbol in signs);
-    if ((expression === '0' && !(symbol in signs)) || expression in verdicts)
+    if ((expression === '0' && !inArray(symbol, signs)) || inArray(expression, verdicts)) {
         expression = '';
+    }
     if (symbol === '.' && isNaN(expression[length - 1])) {
         expression += '0';
     }
-    if (symbol in signs && expression[length - 1] in signs) {
+    if (inArray(symbol, signs) && inArray(expression[length - 1], signs)) {
         expression = expression.slice(0, length - 1);
     }
     expression += symbol;
@@ -32,13 +37,15 @@ const addSymbol = (symbol) => {
 }
 
 const deleteSymbol = () => {
+    if (inArray(expression, verdicts)) {
+        expression = '0';
+        writeToInput();
+        return;
+    }
     expression = expression.slice(0, expression.length - 1);
     if (!expression.length) {
         addSymbol('0');
     } else {
-        if (expression in verdicts) {
-            expression = '0';
-        }
         writeToInput();
     }
 }
@@ -48,47 +55,11 @@ const deleteAllSymbols = () => {
     writeToInput();
 }
 
-const checkExpression = () => {
-    let kolBraces = 0;
-    for (let i = 0; i < expression.length; i++) {
-        if (expression[i] in signs) {
-            if (!i || i === expression.length - 1 || isNaN(expression[i - 1]) || isNaN(expression[i + 1])) {
-                return false;
-            }
-        }
-        if (expression[i] !== '(' && expression[i] !== ')')
-            continue;
-        kolBraces += (expression[i] === '(') ? 1 : -1;
-        if (i > 0) {
-            if (expression[i] === expression[i - 1])
-                continue;
-            if (expression[i] === '(' && !(expression[i - 1] in signs)) {
-                return false;
-            }
-            if (expression[i] === ')' && expression[i - 1] !== '.' && isNaN(expression[i - 1])) {
-                return false;
-            }
-        } else if (i < expression.length - 1) {
-            if (expression[i] === expression[i + 1]) {
-                continue;
-            }
-            if (expression[i] === '(' && isNaN(expression[i + 1])) {
-                return false;
-            }
-            if (expression[i] === ')' && !(expression[i + 1] in signs)) {
-                return false;
-            }
-        }
-    }
-    return !kolBraces;
-}
-
 const calculate = () => {
-    if (!checkExpression()) {
-        expression = 'error';
-        writeToInput();
-        return;
+    try {
+        expression = eval(expression);
+    } catch (error) {
+        expression = 'ты чмо';
     }
-    expression = eval(expression);
     writeToInput();
 }
