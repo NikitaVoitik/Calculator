@@ -12,8 +12,8 @@ const writeToInput = () => {
 
 const inArray = (elem, array) => {
     console.log(elem, array);
-    for(let prop in array){
-        if (elem === array[prop]){
+    for(let prop of array){
+        if (elem === prop){
             console.log(true);
             return true;
         }
