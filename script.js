@@ -10,34 +10,26 @@ const writeToInput = () => {
     input.value = expression.substr(Math.max(0, length - 15), Math.min(length, 15));
 }
 
-const inArray = (elem, array) => {
-    console.log(elem, array);
-    for(let prop of array){
-        if (elem === prop){
-            console.log(true);
-            return true;
-        }
-    }
-    return false;
-}
-
 const addSymbol = (symbol) => {
-    const length = expression.length;
-    if ((expression === '0' && !inArray(symbol, signs)) || inArray(expression, verdicts)) {
+    if (expression === '0' && !signs.find(item => item === symbol) || verdicts.find(item => item === expression)) {
         expression = '';
     }
-    if (symbol === '.' && isNaN(expression[length - 1])) {
+    if (symbol === '.' && isNaN(expression[expression.length - 1])) {
         expression += '0';
     }
-    if (inArray(symbol, signs) && inArray(expression[length - 1], signs)) {
-        expression = expression.slice(0, length - 1);
+    if (signs.find(item => item === symbol) && signs.find(item => item === expression[expression.length - 1])) {
+        if (symbol === '-') {
+            expression += '(';
+        } else {
+            expression = expression.slice(0, length - 1);
+        }
     }
     expression += symbol;
     writeToInput();
 }
 
 const deleteSymbol = () => {
-    if (inArray(expression, verdicts)) {
+    if (verdicts.find(item => item === expression)) {
         expression = '0';
         writeToInput();
         return;
